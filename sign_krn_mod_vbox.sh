@@ -23,7 +23,7 @@ function checkmok {
 
 function genkey_sign {
   openssl req -new -x509 -newkey rsa:2048 -keyout $1.priv -outform DER -out $1.der -nodes -days 36500 -subj "/CN=vbox_custom/"
-  for i in $(dirname $(modinfo -n vboxdrv))/*.ko; do echo "Signing $i"; sudo /usr/src/kernels/$(uname -r)/scripts/sign-file sha256 ./$1.priv ./$1.der $i; done
+  for i in $(dirname $(modinfo -n vboxdrv))/*.ko; do echo "$i"; sudo /usr/src/kernels/$(uname -r)/scripts/sign-file sha256 ./$1.priv ./$1.der $i; done
 }
 
 usage
